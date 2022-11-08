@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+a,
+img,
+button,
+input,
+label,
+select,
+span,
+i {
+    display: inline-block;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    list-style: none;
+}
+img {
+    width: 100%;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: slategrey;
+}
+.game-container {
+    --lineWidth: 0.5rem;
+    --topBar-width: 20rem;
+    --topBar-sideBar-width: 5rem;
+    --middleBar-height: 40rem;
+    --bottomBar-width: 25rem;
+
+    --head-size: 9rem;
+    --body-height: 12rem;
+    --length: 8rem;
+
+    max-width: 140rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+.game-container h5 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.stand-topBar {
+    height: var(--lineWidth);
+    width: var(--topBar-width);
+    background-color: #000;
+    margin-left: calc(calc(var(--bottomBar-width) / 2) - calc(var(--lineWidth) / 2));
+    position: relative;
+}
+.stand-topBar::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: var(--lineWidth);
+    height: var(--topBar-sideBar-width);
+    background-color: #000;
+}
+
+.person-head {
+    position: absolute;
+    top: var(--topBar-sideBar-width);
+    right: 0%;
+    transform: translateX(calc(50% - calc(var(--lineWidth) / 2)));
+
+    height: var(--head-size);
+    width: var(--head-size);
+    border-radius: 50%;
+    border: var(--lineWidth) solid #000;
+}
+.person-body {
+    position: absolute;
+    top: calc(var(--topBar-sideBar-width) + var(--head-size));
+    right: 0%;
+    transform: translateX(calc(50% - calc(var(--lineWidth) / 2)));
+
+    height: var(--body-height);
+    width: var(--lineWidth);
+    background-color: #000;
+}
+.person-right-arm,
+.person-left-arm,
+.person-right-leg,
+.person-left-leg {
+    position: absolute;
+    top: calc(
+        var(--topBar-sideBar-width) + var(--head-size) + var(--body-height) -
+            calc(var(--lineWidth) / 2)
+    );
+    right: 0%;
+    transform: translateX(calc(50% - calc(var(--lineWidth) / 2)));
+
+    height: var(--length);
+    width: var(--lineWidth);
+    transform-origin: top;
+    transform: rotate(45deg);
+    background-color: #000;
+}
+
+.person-right-leg {
+    transform: rotate(-45deg);
+}
+
+.person-left-arm,
+.person-right-arm {
+    top: calc(
+        var(--topBar-sideBar-width) + var(--head-size) + calc(var(--body-height) / 2.5) -
+            calc(var(--lineWidth) / 2)
+    );
+}
+
+.person-left-arm {
+    transform: rotate(235deg);
+}
+.person-right-arm {
+    transform: rotate(-235deg);
+}
+
+.stand-middleBar {
+    height: var(--middleBar-height);
+    width: var(--lineWidth);
+    background-color: #000;
+    margin-left: calc(calc(var(--bottomBar-width) / 2) - calc(var(--lineWidth) / 2));
+}
+.stand-bottomBar {
+    height: var(--lineWidth);
+    width: var(--bottomBar-width);
+    background-color: #000;
+}
+
+.hangman-word {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: monospace;
+}
+.hangman-word > span {
+    border-bottom: 0.5rem solid;
+}
+.hangman-word span span {
+    visibility: hidden;
+}
+.hangman-word span span.guessed {
+    visibility: visible;
+}
+.hangman-word span span.notGuessed {
+    visibility: visible;
+    color: red;
+}
+
+.keyboard {
+    width: 100%;
+    max-width: 40rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.keyboard .key {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    border: 2px solid;
+    padding: 0.7rem;
+    transition: 0.3s;
+    background-color: rgb(173, 171, 171);
+}
+.keyboard .key:not(:disabled):is(:hover, :active) {
+    transform: scale(1.05);
+    background-color: rgb(70, 70, 70);
+}
+.keyboard .key:disabled {
+    cursor: not-allowed;
+}
+.keyboard .key.active {
+    background-color: rgba(0, 255, 255, 0.629);
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.keyboard .key.active:is(:hover, :active) {
+    background-color: rgba(0, 255, 255, 0.629);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.gameOverText {
+    color: palegreen;
+    text-transform: uppercase;
+    font-size: 2rem;
+    text-align: center;
+}
